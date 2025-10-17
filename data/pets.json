@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Moti",
+    "type": "Dog",
+    "age": 3,
+    "adopted": false
+  },
+  {
+    "id": 2,
+    "name": "Google",
+    "type": "Cat",
+    "age": 2,
+    "adopted": true
+  },
+  {
+    "id": 3,
+    "name": "Micky",
+    "type": "cat",
+    "age": 2,
+    "adopted": true
+  },
+  {
+    "id": 4,
+    "name": "Jack",
+    "type": "dog",
+    "age": 3,
+    "adopted": true
+  }
+]
