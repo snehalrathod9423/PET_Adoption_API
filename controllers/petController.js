@@ -1,71 +1,33 @@
-const fs = require('fs');
-const path = require('path');
 
-// ✅ Path to pets.json file
-const dataPath = path.join(__dirname, '../data/pets.json');
+import { readJSON, writeJSON } from '../utils/fileUtils.js';
 
-// ✅ Helper function to read pets from file
-const loadPets = () => {
-  try {
-    const data = fs.readFileSync(dataPath);
-    return JSON.parse(data);
-  } catch (err) {
-    console.error('Error reading pets.json:', err);
-    return [];
-  }
-};
+const petsFile = './data/pets.json';
 
-// ✅ Helper function to save pets to file
-const savePets = (pets) => {
-  fs.writeFileSync(dataPath, JSON.stringify(pets, null, 2));
-};
-
-// ✅ GET all pets
-exports.getAllPets = (req, res) => {
-  const pets = loadPets();
+export function getPets(req, res) {
+  const pets = readJSON(petsFile);
   res.json(pets);
-};
+}
 
-// ✅ GET single pet by ID
-exports.getPetById = (req, res) => {
-  const pets = loadPets();
-  const pet = pets.find(p => p.id === parseInt(req.params.id));
-  if (!pet) return res.status(404).json({ message: 'Pet not found' });
-  res.json(pet);
-};
+export function addPet(req, res) {
+  const pets = readJSON(petsFile);
+  const pet = { id: Date.now(), ...req.body, owner: req.user.id };
+  pets.push(pet);
+  writeJSON(petsFile, pets);
+  res.status(201).json(pet);
+}
 
-// ✅ POST — Add new pet
-exports.addPet = (req, res) => {
-  const pets = loadPets();
-  const newPet = { id: pets.length + 1, ...req.body };
-  pets.push(newPet);
-  savePets(pets);
-  res.status(201).json(newPet);
-};
-
-// ✅ PUT — Update pet by ID
-exports.updatePet = (req, res) => {
-  const pets = loadPets();
+export function updatePet(req, res) {
+  const pets = readJSON(petsFile);
   const index = pets.findIndex(p => p.id === parseInt(req.params.id));
-
-  if (index === -1) {
-    return res.status(404).json({ message: 'Pet not found' });
-  }
+  if (index === -1) return res.status(404).json({ message: 'Pet not found' });
 
   pets[index] = { ...pets[index], ...req.body };
-  savePets(pets);
+  writeJSON(petsFile, pets);
   res.json(pets[index]);
-};
+}
 
-// ✅ DELETE — Remove pet by ID
-exports.deletePet = (req, res) => {
-  const pets = loadPets();
-  const filteredPets = pets.filter(p => p.id !== parseInt(req.params.id));
-
-  if (filteredPets.length === pets.length) {
-    return res.status(404).json({ message: 'Pet not found' });
-  }
-
-  savePets(filteredPets);
-  res.json({ message: 'Pet deleted successfully' });
-};
+export function deletePet(req, res) {
+  const pets = readJSON(petsFile).filter(p => p.id !== parseInt(req.params.id));
+  writeJSON(petsFile, pets);
+  res.json({ message: 'Pet deleted' });
+}

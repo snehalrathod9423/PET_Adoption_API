@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
+import auth from '../middleware/authMiddleware.js';
+import { getPets, addPet, updatePet, deletePet } from '../controllers/petController.js';
+
 const router = express.Router();
-const petController = require('../controllers/petController');
 
-// CRUD routes
-router.get('/', petController.getAllPets);
-router.post('/', petController.addPet);
-router.get('/:id', petController.getPetById);
-router.put('/:id', petController.updatePet);
-router.delete('/:id', petController.deletePet);
+router.get('/', auth, getPets);
+router.post('/', auth, addPet);
+router.put('/:id', auth, updatePet);
+router.delete('/:id', auth, deletePet);
 
-module.exports = router;
+export default router;
