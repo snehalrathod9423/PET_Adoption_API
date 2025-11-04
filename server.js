@@ -1,22 +1,19 @@
-
-
-import express from 'express';
-import dotenv from 'dotenv';
-import authRoutes from './routes/authRoutes.js';
-import petRoutes from './routes/petRoutes.js';
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const petRoutes = require('./routes/petRoutes');
 
 dotenv.config();
-
 const app = express();
-app.use(express.json());
-app.get('/', (req, res) => {
-  res.send('Animal Pet Adoption API is up and running!');
-});
 
-app.use('/api/auth', authRoutes);
+app.use(express.json());
+
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err));
+
 app.use('/api/pets', petRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
