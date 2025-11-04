@@ -1,45 +1,68 @@
-# PET Adoption API (CRUD without Authentication)
+# PET Adoption API with Authentication (CRUD + JWT)
+A secure backend API for managing pet adoption data built with Node.js, Express, and local JSON file storage. This API provides full CRUD functionality for pet profiles and user authentication using JWT tokens for protected access.
 
-A backend API for managing pet adoption data built with Node.js, Express, and MongoDB. This API provides full CRUD functionality for pet profiles and adoption applications without requiring user authentication.
+# Technologies Used
+Node.js
 
-## Technologies Used
+Express.js
 
-- Node.js
-- Express.js
-- MongoDB with Mongoose
+JSON file-based data storage (users, pets)
 
-## Features
+JWT-based Authentication and Authorization
 
-✅ Full CRUD for Pets: Create, read, update, and delete pet records.  
-✅ Full CRUD for Adoption Applications: Manage adoption requests from start to finish.  
-✅ No Authentication: Open API endpoints without login or authorization.  
-✅ Organized Code: Following MVC or modular structure for easy maintenance.
+# Features
+✅ Full CRUD for Pets: Create, read, update, and delete pet records.
+✅ JWT Authentication: Secure API endpoints with user registration and login.
+✅ Modular Code: Organized folders for controllers, routes, middleware, and utilities.
+✅ Environment Configuration: Supports .env file for secret keys and config.
 
-## Getting Started
+# Getting Started
+Prerequisites
+Node.js and npm installed
 
-### Prerequisites
+API client like Postman or curl
 
-- Node.js and npm installed  
-- MongoDB server (local or Atlas)  
-- API client like Postman
+# Installation
+Clone the repository:
 
-### Installation
+git clone https://github.com/yourusername/PET_Adoption_API.git
 
-1. Clone the repository:
-   git clone https://github.com/snehalrathod9423/PET_Adoption_API.git2. Change directory:  cd PET_Adoption_API3. Install dependencies:  npm install4. Create a .env file with your MongoDB connection string:  MONGO_URI=your_mongodb_connection_string
-PORT=your_preferred_port (optional)5. Start the server:  npm start
-## API Endpoints Overview
+Change directory:
 
-### Pets  
-- GET /api/pets - Get all pets  
-- POST /api/pets - Add a pet  
-- GET /api/pets/:id - Get pet by ID  
-- PUT /api/pets/:id - Update pet by ID  
-- DELETE /api/pets/:id - Delete pet by ID  
+cd PET_Adoption_API
 
-### Adoption Applications  
-- GET /api/adoptions - Get all applications  
-- POST /api/adoptions - Create adoption application  
-- GET /api/adoptions/:id - Get application by ID  
-- PUT /api/adoptions/:id - Update application by ID  
-- DELETE /api/adoptions/:id - Delete application by ID
+Install dependencies:
+npm install
+
+Create a .env file in the root with:
+PORT=5000
+
+JWT_SECRET=your_secure_jwt_secret_key
+
+Start the server:
+node server.js
+
+API Endpoints Overview
+
+# Authentication
+1.POST /api/auth/register - Register a new user
+
+2.POST /api/auth/login - User login, returns JWT token
+
+Pets (Protected with JWT Token)
+1.GET /api/pets - Get all pets
+
+2.POST /api/pets - Add a pet
+
+3.GET /api/pets/:id - Get pet by ID
+
+4.PUT /api/pets/:id - Update pet by ID
+
+5.DELETE /api/pets/:id - Delete pet by ID
+
+# Usage Notes
+1.Include the JWT token in the Authorization header as Bearer <token> for all /api/pets requests.
+
+2.User passwords are hashed and never stored in plain text.
+
+3.Data is stored locally in JSON files under the data/ folder.
