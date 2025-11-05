@@ -25,7 +25,7 @@ API client like Postman or curl
 # Installation
 Clone the repository:
 
-git clone https://github.com/yourusername/PET_Adoption_API.git
+git clone https://github.com/snehalrathod9423/PET_Adoption_API.git
 
 Change directory:
 
