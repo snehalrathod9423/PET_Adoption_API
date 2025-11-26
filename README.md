@@ -1,68 +1,113 @@
-# PET Adoption API with Authentication (CRUD + JWT)
-A secure backend API for managing pet adoption data built with Node.js, Express, and local JSON file storage. This API provides full CRUD functionality for pet profiles and user authentication using JWT tokens for protected access.
+🐾 PET Adoption API
 
-# Technologies Used
-Node.js
+A RESTful backend API built with Node.js, Express, and MongoDB to manage pets, users, and adoption requests. This project includes secure authentication, CRUD operations, and follows MVC architecture.
 
-Express.js
+🚀 Features
+🔐 Authentication
 
-JSON file-based data storage (users, pets)
+User Registration
 
-JWT-based Authentication and Authorization
+Secure Login with JWT
 
-# Features
-✅ Full CRUD for Pets: Create, read, update, and delete pet records.
-✅ JWT Authentication: Secure API endpoints with user registration and login.
-✅ Modular Code: Organized folders for controllers, routes, middleware, and utilities.
-✅ Environment Configuration: Supports .env file for secret keys and config.
+Password hashing using bcrypt
 
-# Getting Started
-Prerequisites
-Node.js and npm installed
+🐶 PET Management
 
-API client like Postman or curl
+Add a new pet
 
-# Installation
-Clone the repository:
+View all available pets
 
-git clone https://github.com/snehalrathod9423/PET_Adoption_API.git
+Update pet details
 
-Change directory:
+Delete a pet
 
+Adopt / Update adoption status
+
+🗄️ Database
+
+Fully migrated to MongoDB
+
+Mongoose schemas & validation
+
+Environment-variable-based DB connection
+
+🧩 Architecture
+
+MVC Pattern
+
+Controllers for logic
+
+Routes for endpoints
+
+Middleware for authentication
+
+Models for MongoDB schemas
+
+🛠️ Tech Stack
+Technology	Purpose
+Node.js	Runtime
+Express.js	Server framework
+MongoDB / Mongoose	Database + ORM
+JWT	Authentication
+bcrypt	Password security
+dotenv	Environment variables
+📁 Folder Structure
+PET_Adoption_API/
+├─ controllers/
+├─ models/
+├─ routes/
+├─ middleware/
+├─ utils/
+├─ server.js
+└─ README.md
+🔧 Setup Instructions
+1️⃣ Clone the Repository
+git clone <repo-url>
 cd PET_Adoption_API
-
-Install dependencies:
+2️⃣ Install Dependencies
 npm install
-
-Create a .env file in the root with:
+3️⃣ Create .env File
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
 PORT=5000
+4️⃣ Start the Server
+npm start
 
-JWT_SECRET=your_secure_jwt_secret_key
+Server will run on:
 
-Start the server:
-node server.js
+http://localhost:5000
+📌 API Endpoints
+🔐 Authentication
+Method	Endpoint	Description
+POST	/api/auth/register	Register new user
+POST	/api/auth/login	Login & receive token
+🐾 Pets
+Method	Endpoint	Description
+GET	/api/pets/	Get all pets
+POST	/api/pets/	Add a new pet
+GET	/api/pets/:id	Get a pet by ID
+PUT	/api/pets/:id	Update pet details
+DELETE	/api/pets/:id	Remove a pet
+🛡️ Security
 
-API Endpoints Overview
+Passwords hashed
 
-# Authentication
-1.POST /api/auth/register - Register a new user
+Token-based authentication
 
-2.POST /api/auth/login - User login, returns JWT token
+Protected pet routes
 
-Pets (Protected with JWT Token)
-1.GET /api/pets - Get all pets
+Environment variables hidden
 
-2.POST /api/pets - Add a pet
+📌 Future Enhancements
 
-3.GET /api/pets/:id - Get pet by ID
+Image upload for pets
 
-4.PUT /api/pets/:id - Update pet by ID
+Admin/user role management
 
-5.DELETE /api/pets/:id - Delete pet by ID
+Adoption request workflow
 
-# Usage Notes
-1.Include the JWT token in the Authorization header as Bearer <token> for all /api/pets requests.
+Pagination & filtering
 
-2.User passwords are hashed and never stored in plain text.
+🤝 Contributing
 
-3.Data is stored locally in JSON files under the data/ folder.
+Pull requests are welcome! For major changes, open an issue first to discuss your ideas.
