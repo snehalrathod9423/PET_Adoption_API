@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+
 const petRoutes = require('./routes/petRoutes');
-const exportRoutes = require('./routes/exportRoutes');  // ⬅️ ADD THIS
+const exportRoutes = require('./routes/exportRoutes');
+const adoptionRoutes = require('./routes/adoptionRoutes'); // ✅ ADD THIS
 
 dotenv.config();
 const app = express();
@@ -16,9 +18,10 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Routes
 app.use('/api/pets', petRoutes);
-
-// ⬅️ ADD THIS ROUTE HERE
 app.use('/api/export', exportRoutes);
+
+// ✅ Adoption Request Routes
+app.use('/api/adoptions', adoptionRoutes);
 
 // Root route for Render homepage
 app.get('/', (req, res) => {
